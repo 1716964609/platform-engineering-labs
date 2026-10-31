@@ -1,0 +1,25 @@
+2026年 10月31日 土曜日 14時45分31秒 JST
+kind-helm-lab
+NAME          CLASS              ADDRESS   PROGRAMMED   AGE
+shared-edge   platform-gwclass             True         93m
+NAMESPACE   NAME                 HOSTNAMES         AGE
+team-a      app-route            ["a.lab.test"]    90m
+team-b      app-route            ["b2.lab.test"]   90m
+team-c      unauthorized-route   ["c.lab.test"]    87m
+NAME                 STATUS   AGE   LABELS
+default              Active   13h   kubernetes.io/metadata.name=default
+helm-lab             Active   13h   kubernetes.io/metadata.name=helm-lab,name=helm-lab
+kube-node-lease      Active   13h   kubernetes.io/metadata.name=kube-node-lease
+kube-public          Active   13h   kubernetes.io/metadata.name=kube-public
+kube-system          Active   13h   kubernetes.io/metadata.name=kube-system
+local-path-storage   Active   13h   kubernetes.io/metadata.name=local-path-storage
+platform-gateway     Active   93m   kubernetes.io/metadata.name=platform-gateway,name=platform-gateway
+team-a               Active   12h   kubernetes.io/metadata.name=team-a,name=team-a,platform.example.com/gateway-access=true
+team-b               Active   12h   kubernetes.io/metadata.name=team-b,name=team-b,platform.example.com/gateway-access=true
+team-c               Active   12h   kubernetes.io/metadata.name=team-c,name=team-c
+yes
+no
+a.lab.test: HTTP 200
+b.lab.test: HTTP 404
+b2.lab.test: HTTP 200
+c.lab.test: HTTP 404
