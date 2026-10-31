@@ -1,0 +1,9 @@
+apiVersion: lab.platform.example.com/v1alpha1
+kind: WebService
+metadata:
+  name: invalid-web
+  namespace: default
+spec:
+  image: nginx:1.27
+  replicas: 99
+  hostname: invalid.lab.test

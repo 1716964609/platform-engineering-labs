@@ -1,0 +1,8 @@
+apiVersion: lab.platform.example.com/v1alpha1
+kind: WebService
+metadata:
+  name: hello-web
+  namespace: default
+spec:
+  image: nginx:1.27
+  hostname: hello.lab.test
