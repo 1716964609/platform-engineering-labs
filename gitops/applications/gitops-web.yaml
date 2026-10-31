@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitops-web
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: git@github.com:1716964609/platform-engineering-labs.git
+    targetRevision: main
+    path: helm/demo-web
+    helm:
+      releaseName: gitops-web
+      valueFiles:
+        - values-gitops.yaml
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: gitops-lab
