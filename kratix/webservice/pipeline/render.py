@@ -31,6 +31,27 @@ deployment = {
     }
 }
 
+
+RESOURCE_PROFILES = {
+    "small": {
+        "requests": {"cpu": "50m", "memory": "32Mi"},
+        "limits": {"cpu": "100m", "memory": "64Mi"},
+    },
+    "medium": {
+        "requests": {"cpu": "100m", "memory": "64Mi"},
+        "limits": {"cpu": "250m", "memory": "256Mi"},
+    },
+}
+
+profile = spec.get("resourceProfile")
+if profile is not None:
+    if profile not in RESOURCE_PROFILES:
+        raise ValueError(f"Unsupported resource profile: {profile}")
+
+    deployment["spec"]["template"]["spec"]["containers"][0][
+        "resources"
+    ] = RESOURCE_PROFILES[profile]
+
 service = {
     "apiVersion": "v1",
     "kind": "Service",

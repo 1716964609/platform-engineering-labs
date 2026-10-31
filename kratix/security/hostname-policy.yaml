@@ -1,0 +1,39 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: webservice-hostname-ownership
+spec:
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+      - apiGroups:
+          - lab.platform.example.com
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - webservices
+  validations:
+    - expression: >-
+        namespaceObject != null &&
+        'platform.lab/tenant' in namespaceObject.metadata.labels &&
+        object.spec.hostname.endsWith(
+          '.' + namespaceObject.metadata.labels['platform.lab/tenant'] + '.lab.test'
+        )
+      message: "WebService hostname must belong to its tenant namespace"
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: webservice-hostname-ownership-binding
+spec:
+  policyName: webservice-hostname-ownership
+  validationActions:
+    - Deny
+  matchResources:
+    namespaceSelector:
+      matchExpressions:
+        - key: platform.lab/tenant
+          operator: Exists
