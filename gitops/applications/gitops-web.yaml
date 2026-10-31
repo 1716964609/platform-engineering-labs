@@ -4,7 +4,7 @@ metadata:
   name: gitops-web
   namespace: argocd
 spec:
-  project: default
+  project: team-a-gitops
 
   source:
     repoURL: git@github.com:1716964609/platform-engineering-labs.git
