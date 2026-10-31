@@ -47,12 +47,43 @@ service = {
     }
 }
 
+
+httproute = {
+    "apiVersion": "gateway.networking.k8s.io/v1",
+    "kind": "HTTPRoute",
+    "metadata": {
+        "name": name,
+        "namespace": namespace
+    },
+    "spec": {
+        "parentRefs": [{
+            "name": "shared-edge",
+            "namespace": "platform-gateway",
+            "sectionName": "web"
+        }],
+        "hostnames": [spec["hostname"]],
+        "rules": [{
+            "matches": [{
+                "path": {
+                    "type": "PathPrefix",
+                    "value": "/"
+                }
+            }],
+            "backendRefs": [{
+                "name": name,
+                "port": 80
+            }]
+        }]
+    }
+}
+
 output = Path("/kratix/output")
 output.mkdir(parents=True, exist_ok=True)
 
 for filename, manifest in [
     ("deployment.yaml", deployment),
-    ("service.yaml", service)
+    ("service.yaml", service),
+    ("httproute.yaml", httproute)
 ]:
     (output / filename).write_text(
         yaml.safe_dump(manifest, sort_keys=False)
