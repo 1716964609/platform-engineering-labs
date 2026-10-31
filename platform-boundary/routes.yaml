@@ -1,0 +1,39 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: app-route
+  namespace: team-a
+spec:
+  parentRefs:
+    - name: shared-edge
+      namespace: platform-gateway
+  hostnames:
+    - a.lab.test
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: web-demo-web
+          port: 80
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: app-route
+  namespace: team-b
+spec:
+  parentRefs:
+    - name: shared-edge
+      namespace: platform-gateway
+  hostnames:
+    - b2.lab.test
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: web-demo-web
+          port: 80

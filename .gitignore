@@ -1,0 +1,16 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
+*.tfvars.json
+.terraform.tfstate.lock.info
+
+# Credentials
+.env
+.env.*
+*.pem
+
+# macOS
+.DS_Store

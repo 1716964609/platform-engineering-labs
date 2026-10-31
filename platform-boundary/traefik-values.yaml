@@ -1,0 +1,20 @@
+providers:
+  kubernetesGateway:
+    enabled: true
+
+gatewayClass:
+  name: platform-gwclass
+
+gateway:
+  name: shared-edge
+  listeners:
+    web:
+      namespacePolicy:
+        from: Selector
+        selector:
+          matchLabels:
+            platform.example.com/gateway-access: "true"
+
+service:
+  spec:
+    type: ClusterIP

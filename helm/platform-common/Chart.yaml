@@ -1,0 +1,5 @@
+apiVersion: v2
+name: platform-common
+version: 0.2.0
+type: library
+description: Shared platform templates

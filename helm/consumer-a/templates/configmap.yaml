@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+  labels:
+    {{- include "platform-common.labels" . | nindent 4 }}
+data:
+  team: {{ .Chart.Name | quote }}

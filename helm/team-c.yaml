@@ -1,0 +1,8 @@
+replicaCount: 1
+
+image:
+  tag: stable-alpine
+
+sidecar:
+  enabled: true
+  image: busybox:1.36

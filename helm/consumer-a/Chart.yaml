@@ -1,0 +1,8 @@
+apiVersion: v2
+name: consumer-a
+version: 0.1.0
+type: application
+dependencies:
+  - name: platform-common
+    version: 0.2.0
+    repository: file://../platform-common
